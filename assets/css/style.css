@@ -1,83 +1,70 @@
-/* Empêcher les transitions pendant le chargement */
-html.no-transition *, body.no-transition * {
-    transition: none !important;
-}
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 
-/* Transition douce quand activé */
-body, .home-container, .grid-container, .card, .navbar, 
-#editModal, #addModal, #settings-modal, button, .btn {
-    transition: background-color 0.4s, color 0.4s, border-color 0.4s, transform 0.3s;
-}
-
-
-
+/* ================================================
+   1. VARIABLES ROOT & STYLES GLOBAUX DE TRANSITION
+   ================================================ */
 :root {
-    --bg-color: #f5f7fa;
-    --card-color: #ffffff;
-    --text-color: #333333;
-    --accent-color: #3b82f6;
-    --accent-hover: #2563eb;
-    --navbar-color: #333333;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --accent-color: #4f46e5;
+    --accent-hover: #4338ca;
+    --text-color: #1f2937;
+    --navbar-color: #333;
+    --border-radius: 10px;
     --modal-bg-color: #ffffff;
 }
 
+/* EMPÊCHER LES TRANSITIONS PENDANT LE CHARGEMENT (VÉRIFIEZ QUE C'EST BIEN RETIRÉ PAR JS !) */
+html.no-transition *,
+body.no-transition * {
+    transition: none;
+}
+
+/* Transitions douces globales ... */
+/* Pour le test, on peut même commenter la transition globale pour éviter interférence */
+body,
+.home-container,
+.grid-container,
+.navbar,
+#editModal,
+#addModal,
+#settings-modal,
+button,
+.btn {
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s, transform 0.3s;
+}
+
+/* ================================================
+   2. STYLES DE BASE DES ÉLÉMENTS HTML
+   ================================================ */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
     color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.home-container {
-    background-color: var(--bg-color);
-}
-
-h1, h2 {
+/* ... (h1, h2, a, button styles restent les mêmes) ... */
+h1,
+h2 {
     text-align: center;
+    font-weight: 500; /* Un peu plus de poids pour les titres */
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
+h1 {
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
-.card {
-    background-color: var(--card-color);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-    text-align: center;
+h2 {
+     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-/* Animation fade-in (ajoutée au chargement) */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.cover-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.card-content {
-    padding: 10px;
-}
 
 a {
     text-decoration: none;
@@ -86,50 +73,32 @@ a {
 
 button {
     cursor: pointer;
+    border: none;
+    background: none; /* Enlever fond par défaut */
+    padding: 0; /* Enlever padding par défaut */
+    font-family: inherit; /* Hériter la police */
 }
 
+/* ================================================
+   3. MISE EN PAGE & CONTENEURS
+   ================================================ */
+/* ... (home-container, grid-container, filter-container restent les mêmes) ... */
 .home-container {
+    /* background-color: var(--bg-color); Redondant si body l'a déjà */
     text-align: center;
-    margin-top: 100px;
+    padding: 40px 15px; /* Ajouter du padding */
+    margin-top: 60px; /* Espace après la navbar sticky */
 }
 
-.home-buttons {
-    margin-top: 30px;
-}
-
-button, .btn {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 24px;
-    background-color: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 8px;
-}
-
-button:hover, .btn:hover {
-    background-color: var(--accent-hover);
-}
-
-.navbar {
-    background-color: var(--navbar-color);
-    overflow: hidden;
-    display: flex;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 160px);
+    gap: 30px;
+    margin: 30px auto;
+    padding: 0 15px; /* Padding latéral */
+    /* Ajustement de max-width pour inclure le padding dans le calcul */
+    max-width: calc(5 * 160px + 4 * 30px + 2 * 15px);
     justify-content: center;
-    padding: 10px 0;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    font-size: 18px;
-}
-
-.navbar a:hover {
-    background-color: #575757;
-    border-radius: 5px;
 }
 
 .filter-container {
@@ -137,120 +106,587 @@ button:hover, .btn:hover {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin: 30px 0;
+    margin: 30px 15px; /* Ajouter padding latéral implicite via margin */
     flex-wrap: wrap;
 }
 
-.search-bar {
-    padding: 8px 14px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 250px;
+/* ================================================
+   4. COMPOSANTS
+   ================================================ */
+
+/* ------------------------------------
+   4.1 Cartes (Cards)
+   ------------------------------------ */
+    
+.card-wrapper {
+    position: relative;
+    width: 160px; /* Ou la taille que tu veux pour tes cartes */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto; /* Centre la carte dans le swiper-slide si le slide est plus large */
 }
 
-.type-select {
-    padding: 8px 14px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
+.card {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    position: relative;
+    transition-property: transform, box-shadow, background-color; /* Assurons-nous que transform est listé */
+    transition-duration: 0.2s, 0.2s, 0.4s; /* Durées respectives */
+    transition-timing-function: ease-out, ease, ease; /* Fonctions de timing respectives */
+    /* Ou plus simplement si tous ont le même timing de base : */
+    /* transition: transform 0.2s ease-out, box-shadow 0.2s ease, background-color 0.4s ease; */
 }
 
-.stars {
-    font-size: 18px;
-    color: gold;
-    margin-top: 5px;
+.card.visible {
+    transition-property: transform, background-color, box-shadow, opacity;
 }
 
-.favori-icon {
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.cover-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    background-color: #eee;
+}
+
+.card-title-below {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 15px;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 10px;
+    padding: 0 5px;
+}
+.card-title-overlay {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 22px;
-    color: gold;
-    cursor: pointer;
-    z-index: 5;
-}
-
-.favori-icon i {
-    pointer-events: none;
-}
-
-.add-button {
-    margin-top: 10px;
-    padding: 8px 15px;
-    border: none;
-    background-color: #4CAF50;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
     color: white;
-    font-size: 14px;
-    border-radius: 5px;
+    padding: 15px 10px 10px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.in-list-indicator {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 1.2em;
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.in-list-indicator i {
+    font-size: 0.8em;
+}
+
+.favori-icon-display {
+     position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1.3em;
+    color: gold;
+    z-index: 3;
+     text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.card-info-panel {
+    position: fixed;
+    transform: translateX(-10px) scale(0.95); /* État initial pour l'animation d'entrée */
+    width: 280px;
+    background-color: #2a2c3c;
+    color: #c3c5d0;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s linear 0.2s;
+}
+
+/* Ajouter une classe pour l'état actif géré par JS */
+.card-info-panel.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+    /* La transition-delay n'est plus nécessaire ici, car le JS gère le délai d'application de la classe */
+    /* Les transitions opacity, transform, visibility sont héritées de .card-info-panel */
+}
+
+.card-info-panel.visible-for-measure {
+    visibility: visible !important;
+    position: fixed !important; /* Important pour ne pas perturber le flux lors de la mesure */
+    top: -9999px !important; /* Hors de l'écran */
+    left: -9999px !important; /* Hors de l'écran */
+    opacity: 0 !important; /* Garder invisible */
+    z-index: -1 !important; /* Pour être sûr qu'il ne s'affiche pas */
+}
+
+/* Style de la flèche */
+.panel-arrow {
+    position: absolute;
+    top: 50%;
+    left: -10px; /* Positionne la flèche pour qu'elle sorte du côté gauche du panel */
+    transform: translateY(-50%) rotate(45deg);
+    width: 20px;
+    height: 20px;
+    background-color: #2a2c3c; /* Même couleur que le panel */
+    /* box-shadow: -2px 2px 2px rgba(0,0,0,0.1); Ombre subtile sur la flèche */
+    z-index: -1; /* Derrière le contenu du panel mais visible */
+}
+
+.panel-arrow.arrow-left { /* La flèche pointe vers la carte à gauche */
+    left: -10px; /* Sort du côté gauche du panel */
+    right: auto;
+    transform: translateY(-50%) rotate(45deg);
+}
+.panel-arrow.arrow-right { /* La flèche pointe vers la carte à droite */
+    right: -10px; /* Sort du côté droit du panel */
+    left: auto;
+    transform: translateY(-50%) rotate(225deg); /* Pivote dans l'autre sens */
+}
+
+.panel-content {
+    /* Si besoin de styles spécifiques pour le conteneur du contenu */
+}
+
+.panel-next-ep, .panel-status {
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #e0e1e6;
+}
+.panel-status {
+    color: #8be9fd; /* Cyan pour "Terminé" par exemple */
+}
+
+.panel-score {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 0.95em;
+    font-weight: bold;
+    color: #50fa7b; /* Vert pour le score */
+}
+.panel-score i {
+    margin-right: 4px;
+}
+
+.panel-title {
+    font-family: 'Inter', sans-serif; /* Ou la police de ton choix */
+    font-size: 1.1em; /* Ajusté par rapport à l'exemple */
+    font-weight: 500;
+    color: #f8f8f2; /* Blanc cassé pour le titre */
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.panel-meta {
+    font-size: 0.85em;
+    color: #8be9fd; /* Cyan pour les métadonnées */
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si pas assez de place */
+    gap: 4px 8px; /* Espace entre les éléments meta */
+}
+
+.panel-meta span::after { /* Séparateur optionnel */
+    /* content: "•";
+    margin-left: 8px;
+    margin-right: 4px;
+    color: #6272a4; */
+}
+.panel-meta span:last-child::after {
+    /* content: ""; */
+}
+
+.panel-genres {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.genre-tag {
+    background-color: #44475a; /* Fond pour les tags de genre */
+    color: #f8f8f2;
+    padding: 3px 8px;
+    border-radius: 12px; /* Tags arrondis */
+    font-size: 0.75em;
+    font-weight: 500;
+    text-transform: capitalize; /* Première lettre en majuscule */
+}
+
+/* Si tu réactives le synopsis */
+.panel-synopsis {
+    font-size: 0.8em;
+    color: #bd93f9; /* Mauve pour le synopsis */
+    max-height: 70px; /* Limiter la hauteur */
+    overflow-y: auto;
+    margin-top: 8px;
+    padding-right: 5px; /* Espace pour scrollbar */
+    border-top: 1px solid #44475a; /* Séparateur optionnel */
+    padding-top: 8px;
+}
+
+
+/* ... (Boutons, Navbar, Filtres, Pagination, Modales, Loader restent les mêmes) ... */
+/* ------------------------------------
+   4.2 Boutons (Buttons)
+   ------------------------------------ */
+.home-buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    color: white;
+    text-align: center;
+    border: none; /* Assurer qu'il n'y a pas de bordure */
+    -webkit-appearance: none; /* Enlever styles natifs */
+    appearance: none;
+}
+.btn:hover {
+    transform: translateY(-1px); /* Léger effet au survol */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+.btn:active {
+    transform: translateY(0px); /* Effet d'appui */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
 }
 
-.add-button:hover {
-    background-color: #45a049;
+.btn i {
+    font-size: 1em; /* Taille relative à la police du bouton */
+    line-height: 1; /* Meilleur alignement vertical */
 }
 
-.edit-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color: #2196F3;
+.btn.confirm,
+.btn.go-catalogue,
+.btn.go-liste {
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    color: white;
+}
+.btn.confirm:hover,
+.btn.go-catalogue:hover,
+.btn.go-liste:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+.btn.delete:hover {
+    background-color: #c0392b;
+}
+
+.btn.cancel {
+    background-color: #6b7280;
+    color: white;
+}
+.btn.cancel:hover {
+    background-color: #4b5563;
+}
+
+/* Style spécifique pour le bouton de recherche icône seule */
+#searchButton {
+    padding: 10px 12px; /* Padding carré pour une icône */
+    flex-shrink: 0; /* Empêcher le bouton de rétrécir */
+}
+
+
+/* ------------------------------------
+   4.3 Barre de Navigation (Navbar)
+   ------------------------------------ */
+.navbar {
+    background-color: var(--navbar-color); /* Fallback retiré si défini dans :root */
+    padding: 0 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+}
+
+.navbar-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin-right: auto; /* Pousse le reste à droite */
+    flex-shrink: 0; /* Empêche le titre de rétrécir */
+}
+.navbar-title a {
     color: white;
     text-decoration: none;
+    padding: 0;
+    display: block; /* Assure que le lien prend la place */
+}
+.navbar-title a:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
     border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nav-links a:hover {
+    background-color: #575757;
+}
+.nav-links a i, .settings-btn i {
+    font-size: 18px;
+    width: 1.1em; /* Donner une largeur fixe à l'icône pour alignement */
+    text-align: center;
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.settings-btn:hover {
+    background-color: #575757;
+}
+
+
+/* ------------------------------------
+   4.4 Champs de Filtre/Recherche
+   ------------------------------------ */
+.search-bar,
+.type-select {
+    font-family: 'Inter', sans-serif;
+    background-color: #fff; /* Fond blanc explicite */
+    color: var(--text-color); /* Couleur de texte */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Forme arrondie */
+    padding: 10px 16px; /* Plus de padding */
+    font-size: 15px; /* Légèrement plus petit */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 40px; /* Hauteur fixe pour alignement */
+    box-sizing: border-box;
+}
+.search-bar {
+    width: 250px; /* Largeur par défaut */
+    flex-grow: 1; /* Permet de grandir si espace dispo */
+    max-width: 400px; /* Limite l'étirement */
+}
+.type-select {
+    min-width: 180px; /* Largeur minimum pour le select */
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"); /* Flèche custom */
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    -webkit-appearance: none; /* Enlever apparence native */
+    appearance: none;
+}
+.search-bar:focus,
+.type-select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+
+/* ------------------------------------
+   4.5 Pagination
+   ------------------------------------ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Espace réduit */
+    margin: 40px auto;
+    padding: 0 15px;
+}
+.pagination a {
+    padding: 8px 14px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500; /* Moins gras */
     font-size: 14px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.pagination a:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+.pagination a.active { /* Style pour la page active */
+    background-color: var(--accent-hover);
+    font-weight: bold;
+    cursor: default;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    transform: none;
 }
 
-.edit-button:hover {
-    background-color: #1976D2;
-}
 
-
-/* ========================
-   Animations des Modales
-   ======================== */
-   @keyframes modalFadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* ------------------------------------
+   4.6 Modales (Modals)
+   ------------------------------------ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Plus sombre */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
 }
-
-@keyframes modalFadeOut {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-}
+/* Pas besoin de #addModal spécifique si on utilise la classe .modal */
 
 .modal-content {
+    background-color: var(--modal-bg-color, var(--card-bg));
+    padding: 30px; /* Plus de padding */
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 450px; /* Légèrement plus large */
+    text-align: left; /* Aligner le texte à gauche par défaut dans les modales */
     animation: modalFadeIn 0.3s ease-out forwards;
+    position: relative; /* Pour un éventuel bouton fermer absolu */
+}
+.modal-content h2, .modal-content h3 {
+    text-align: center; /* Centrer les titres des modales */
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--accent-color);
+}
+.modal-content label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px 12px; /* Padding standard */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px; /* Coins légèrement moins ronds */
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1em;
+}
+.modal-content textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+.modal-content input:read-only { /* Style pour les champs non modifiables */
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+.modal-content .detail-actions, /* Container pour les boutons d'action */
+.modal-content form > button:last-of-type, /* Ou cibler le dernier bouton si pas de container */
+.modal-content > button:last-of-type {
+    margin-top: 20px; /* Espace avant les boutons */
+    display: flex; /* Aligner les boutons */
+    justify-content: flex-end; /* Boutons à droite */
+    gap: 10px;
+}
+.modal-content .detail-actions .btn.delete {
+    margin-right: auto; /* Pousser le bouton supprimer à gauche */
 }
 
-.modal-hide {
+
+.modal-content.modal-hide {
     animation: modalFadeOut 0.3s ease-out forwards;
 }
 
 
-/* ================ */
-/* Loader Spirale Style */
-/* ================ */
+/* ------------------------------------
+   4.7 Loader Spirale
+   ------------------------------------ */
 .loader {
-    width: 60px;
-    height: 60px;
-    border: 6px solid transparent;
-    border-top: 6px solid var(--accent-color);
-    border-right: 6px solid var(--accent-color);
+    width: 50px; /* Légèrement plus petit */
+    height: 50px;
+    border: 5px solid transparent;
+    border-top-color: var(--accent-color);
+    border-right-color: var(--accent-color);
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
     position: fixed;
@@ -258,7 +694,110 @@ button:hover, .btn:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2000;
-    box-shadow: 0 0 10px var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color); /* Lueur plus prononcée */
+}
+
+
+/* Dans style.css (ajustements pour Swiper) */
+
+.home-section .swiper-container {
+    width: 100%;
+    /* padding: 0 10px; /* Si tu veux un peu d'espace sur les côtés sans que les flèches soient DANS cet espace */
+    /* overflow: hidden; /* Swiper gère ça, mais parfois utile */
+}
+
+.home-section .swiper-slide {
+    /* height: auto; /* Permet aux slides d'avoir des hauteurs différentes si besoin, mais pour des cartes c'est mieux si elles ont la même hauteur */
+    display: flex; /* Si tu veux centrer le contenu du slide (card-wrapper) */
+    justify-content: center;
+    align-items: center;
+    /* background: #eee; /* Juste pour voir les boîtes des slides pendant le dev */
+}
+
+/* Personnalisation des flèches Swiper */
+.home-section .swiper-button-next,
+.home-section .swiper-button-prev {
+    color: var(--accent-color); /* Couleur des flèches */
+    background-color: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
+    border-radius: 50%;
+    width: 40px; /* Ajuste la taille */
+    height: 40px;
+    top: 50%; /* Position verticale */
+    transform: translateY(-calc(50% + 25px)); /* Ajuste pour centrer par rapport aux cartes, +25px pour remonter un peu */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+.home-section .swiper-button-next::after, /* Taille de l'icône flèche */
+.home-section .swiper-button-prev::after {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.home-section .swiper-button-next {
+    right: 5px; /* Position */
+}
+.home-section .swiper-button-prev {
+    left: 5px; /* Position */
+}
+
+/* Si tu utilises la pagination par points */
+.home-section .swiper-pagination-bullet {
+    background: var(--accent-color);
+    opacity: 0.5;
+}
+.home-section .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.home-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 20px 20px; } /* Ajouté padding latéral */
+.welcome-header { text-align: center; margin-bottom: 40px; margin-top: 20px; } /* Pour le H1 et P initiaux */
+.home-section { margin-bottom: 50px; } /* Plus d'espace entre sections */
+.home-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Plus d'espace sous le titre de section */
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+.home-section .section-header h2 {
+    margin: 0;
+    font-size: 1.8em; /* Taille adaptée */
+    color: var(--text-color);
+}
+.home-section .section-header .see-all-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+.home-section .section-header .see-all-link:hover { text-decoration: underline; }
+
+/* La grille dans les sections de l'accueil */
+.home-section .section-grid {
+    display: grid;
+    /* Ajuste minmax pour la taille des cartes que tu veux sur l'accueil */
+    /* Le nombre de colonnes s'adaptera. Si tu veux 6 cartes sur une ligne de 1200px,
+    chaque carte + gap doit faire environ 200px. (160px carte + 30px gap) * 6 = 1140px
+    Ici on fait 6 colonnes fixes pour l'exemple, à adapter avec auto-fill si tu préfères */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Plus flexible */
+    gap: 30px; /* Correspond à ton gap du catalogue */
+    justify-content: center; /* Centre la grille si elle ne remplit pas toute la largeur */
+}
+.no-results-section { padding: 20px; text-align: center; color: #777; grid-column: 1 / -1; }
+
+
+
+/* ================================================
+   6. ANIMATIONS KEYFRAMES
+   ================================================ */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes modalFadeOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 0; transform: translateY(-10px) scale(0.98); }
 }
 
 @keyframes spin {
@@ -266,3 +805,129 @@ button:hover, .btn:hover {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+
+/* ================================================
+   7. MEDIA QUERIES (Adaptabilité)
+   ================================================ */
+
+/* ... (Media Queries restent les mêmes) ... */
+/* Desktop Large (Pas de media query, utilise les styles de base) */
+
+/* Tablette Large / Petit Desktop */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* Utiliser fr pour plus de fluidité */
+        max-width: calc(100% - 30px); /* S'adapte mieux */
+        /* padding déjà défini */
+    }
+    .navbar-title {
+        font-size: 22px;
+    }
+    .nav-links a {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+}
+
+/* Tablette Portrait / Mobile Large */
+@media (max-width: 768px) {
+    .navbar-content {
+        height: auto;
+        flex-direction: column;
+        padding: 15px 0;
+    }
+    .navbar-title {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .navbar-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+        text-align: center;
+    }
+    .nav-links a {
+        justify-content: center;
+        width: 100%;
+        padding: 12px 15px;
+    }
+}
+
+/* Mobile Moyen */
+@media (max-width: 550px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px; /* Augmenter un peu le gap */
+    }
+    .filter-container {
+        gap: 10px; /* Réduire gap */
+    }
+    #searchButton {
+        padding: 10px; /* Rendre carré */
+    }
+    .search-bar,
+    .type-select {
+        width: 100%; /* Prendre toute la largeur disponible dans le conteneur flex */
+        flex-grow: 1; /* Permettre de remplir l'espace */
+    }
+    .modal-content {
+        margin: 0 10px; /* Moins de marge */
+        padding: 20px;
+        max-width: calc(100% - 20px); /* S'assurer qu'il ne dépasse pas */
+    }
+    .nav-links {
+        gap: 8px;
+    }
+    .nav-links a {
+        padding: 10px;
+    }
+}
+
+/* Mobile Petit */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 15px;
+    }
+    .navbar-title {
+        font-size: 20px;
+    }
+    .nav-links a {
+        font-size: 14px;
+    }
+    .nav-links a i, .settings-btn i {
+        font-size: 16px;
+    }
+    .btn { /* Rendre les boutons un peu plus petits */
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    #searchButton {
+        padding: 8px 10px;
+    }
+}
+
+/* Mobile Très Petit */
+@media (max-width: 380px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 15px;
+    }
+    /* .card { width: 100%; } Inutile si le wrapper est à 100% */
+    .navbar-title {
+        font-size: 18px;
+    }
+    .nav-links a, .settings-btn {
+        font-size: 13px;
+    }
+    .filter-container {
+        flex-direction: column; /* Empiler les filtres */
+    }
+    .search-bar, .type-select, #searchButton {
+        width: 100%; /* Prendre toute la largeur */
+    }
+}
