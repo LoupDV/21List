@@ -1,46 +1,47 @@
-# 21List – Manga Tracker Web App
+# 📚 21List – Manga Tracker Web App
 
-**21List** is a web application designed to help users track and organize the manga they’ve read, are currently reading, or plan to read.  
-Inspired by platforms like MyAnimeList, 21List focuses on simplicity, usability, and personal customization.
-
----
+**21List** is a personal manga tracking web application that allows users to log, organize, and visualize their manga reading progress.  
+Think of it as your own minimalist, no-nonsense alternative to MyAnimeList — fully self-hosted and customizable.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/LoupDV/21List?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/LoupDV/21List?style=flat-square)
 ![Maintenance](https://img.shields.io/badge/Maintained-yes-brightgreen?style=flat-square)
 
---- 
+---
 
 ## ✨ Key Features
 
-- 🔍 **Live Search** by manga title
-- 🏷️ **Filter by status** (Reading / Completed / Plan to Read)
-- 📊 **Sort by title, score, progress**
-- ⭐ **Favorites system** for quick access
-- 📈 **Stats dashboard** *(in development)*
-- 🌙 **Dark Mode** toggle
-- 📱 **Fully responsive** interface (desktop & mobile)
-- 🖱️ **Intuitive UI** with clean layout
-- 📤 **Add/Edit/Delete mangas** (CRUD)
+- 🔍 **Live Search** by manga title  
+- 🏷️ **Filter by status** (Reading / Completed / Plan to Read)  
+- 📊 **Sort by title, score, progress**  
+- ⭐ **Favorites system** for quick access  
+- 📈 **Stats dashboard** *(in development)*  
+- 🌙 **Dark Mode** toggle  
+- 📱 **Fully responsive** interface (desktop & mobile)  
+- 🖱️ **Intuitive UI** with clean layout  
+- 📤 **Add/Edit/Delete mangas** (CRUD)  
 - 🎨 **Theming planned** (user-defined colors, font sizes, etc.)
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer        | Technology        |
-|--------------|-------------------|
+| Layer        | Technology            |
+|--------------|-----------------------|
 | Frontend     | HTML, CSS, JavaScript |
-| Backend      | PHP (vanilla)     |
-| Database     | MySQL             |
-| Environment  | MAMP (Localhost)  |
+| Backend      | PHP (vanilla)         |
+| Database     | MySQL                 |
+| Environment  | MAMP (Localhost)      |
 
 ---
 
-## 📷 Preview
+## 🖼️ Screenshots
 
-TODO
+> *(To be added – you can upload screenshots of your dashboard, search feature, or mobile view here)*
 
 ---
 
-## ⚙️ Setup (Local)
+## ⚠️ Notes
+This is a solo development project for learning and portfolio purposes.
+
+Built without frameworks to remain lightweight and easily understandable.
