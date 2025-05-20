@@ -1,7 +1,8 @@
 # 📚 21List – Manga Tracker Web App
 
-**21List** is a personal manga tracking web application that allows users to log, organize, and visualize their manga reading progress.  
-Think of it as your own minimalist, no-nonsense alternative to MyAnimeList — fully self-hosted and customizable.
+
+**21List** is a personal manga tracking web application I designed to manage and organize my manga reading experience.  
+Built from scratch with a full stack architecture, it focuses on clean UI, efficient search/filtering, and future-ready expandability.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/LoupDV/21List?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/LoupDV/21List?style=flat-square)
