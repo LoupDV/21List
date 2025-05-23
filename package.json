@@ -1,0 +1,23 @@
+{
+  "name": "21list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoupDV/21List.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LoupDV/21List/issues"
+  },
+  "homepage": "https://github.com/LoupDV/21List#readme",
+  "devDependencies": {
+    "eslint": "^9.27.0"
+  }
+}
